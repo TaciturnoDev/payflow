@@ -3,15 +3,19 @@ package com.payflow.service;
 import org.springframework.stereotype.Service;
 
 import com.payflow.entity.User;
+import com.payflow.entity.Wallet;
 import com.payflow.repository.UserRepository;
+import com.payflow.repository.WalletRepository;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final WalletRepository walletRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, WalletRepository walletRepository) {
         this.userRepository = userRepository;
+        this.walletRepository = walletRepository;
     }
 
     public User save(User user) {
@@ -20,6 +24,12 @@ public class UserService {
             throw new IllegalArgumentException("E-mail já cadastrado");
         }
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        Wallet wallet = new Wallet(savedUser);
+
+        walletRepository.save(wallet);
+
+        return savedUser;
     }
 }

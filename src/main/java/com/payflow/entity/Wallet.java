@@ -27,4 +27,9 @@ public class Wallet {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    public Wallet(User user) {
+         this.user = user;
+         this.balance = BigDecimal.ZERO;
+    }
 }
