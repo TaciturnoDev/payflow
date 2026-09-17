@@ -9,6 +9,8 @@ import com.payflow.dto.UserRequest;
 import com.payflow.entity.User;
 import com.payflow.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody UserRequest request) {
+    public User create(@Valid @RequestBody UserRequest request) {
 
         User user = new User();
 
