@@ -6,6 +6,7 @@ import com.payflow.entity.User;
 import com.payflow.entity.Wallet;
 import com.payflow.repository.UserRepository;
 import com.payflow.repository.WalletRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -18,6 +19,8 @@ public class UserService {
         this.walletRepository = walletRepository;
     }
 
+    
+    @Transactional
     public User save(User user) {
 
         if (userRepository.existsByEmail(user.getEmail())) {
